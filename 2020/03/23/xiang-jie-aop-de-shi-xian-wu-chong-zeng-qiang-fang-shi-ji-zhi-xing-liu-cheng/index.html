@@ -17,17 +17,17 @@
 
 
     <title>详解AOP的实现（五种增强方式）及执行流程 | 文客</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/favicon.png">
 
-    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
-    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
-    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/matery.css">
-    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/css/my.css">
 
-    <script src="/libs/jquery/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/libs/jquery/jquery.min.js"></script>
     
 <meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="文客" type="application/atom+xml">
 <link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
@@ -39,10 +39,12 @@
         <div id="navContainer" class="nav-wrapper container">
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
-                    
-                    <img src="./images/loading.gif" data-original="/medias/logo.png" class="logo-img" alt="LOGO">
-                    
-                    <span class="logo-span">文客</span>
+		   <div>
+	              
+	              <img src="/medias/loading.gif" data-original="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/medias/logo.png" class="logo-img" alt="LOGO">
+	              
+	              <span class="logo-span">文客</span>
+                   </div>
                 </a>
             </div>
             
@@ -138,7 +140,7 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="./images/loading.gif" data-original="/medias/logo.png" class="logo-img circle responsive-img">
+        <img src="/medias/loading.gif" data-original="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/medias/logo.png" class="logo-img circle responsive-img">
         
         <div class="logo-name">文客</div>
         <div class="logo-desc">
@@ -307,7 +309,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/medias/featureimages/6.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -325,7 +327,7 @@
 <main class="post-container content">
 
     
-    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/libs/tocbot/tocbot.css">
 <style>
     #articleContent h1::before,
     #articleContent h2::before,
@@ -475,7 +477,7 @@
             <div id="articleContent">
                 <p>@[toc]</p>
 <h1 id="AOP的简单介绍"><a href="#AOP的简单介绍" class="headerlink" title="AOP的简单介绍"></a>AOP的简单介绍</h1><p>AOP（Aspect Oriented Programming 面向切面编程）是一种通过运行期动态代理实现代码复用的机制，是对传统OOP(Object Oriented Programming，面向对象编程 )的补充。目前，Aspectj是Java社区里最完整最流行的AOP框架，在Spring 2.0以上版本中可以通过Aspectj注解或基于XML配置AOP。</p>
-<h1 id="建立AOP实例工程"><a href="#建立AOP实例工程" class="headerlink" title="建立AOP实例工程"></a>建立AOP实例工程</h1><h2 id="工程结构如下图所示"><a href="#工程结构如下图所示" class="headerlink" title="工程结构如下图所示"></a>工程结构如下图所示</h2><p><img src="./images/loading.gif" data-original="https://img-blog.csdnimg.cn/2019071614023511.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dhbmdfZGFfYmluZw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>ICalculatorService的源码如下：</strong></p>
+<h1 id="建立AOP实例工程"><a href="#建立AOP实例工程" class="headerlink" title="建立AOP实例工程"></a>建立AOP实例工程</h1><h2 id="工程结构如下图所示"><a href="#工程结构如下图所示" class="headerlink" title="工程结构如下图所示"></a>工程结构如下图所示</h2><p><img src="/medias/loading.gif" data-original="https://img-blog.csdnimg.cn/2019071614023511.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dhbmdfZGFfYmluZw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>ICalculatorService的源码如下：</strong></p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> com<span class="token punctuation">.</span>jd<span class="token punctuation">.</span>calculator<span class="token punctuation">;</span>
 <span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">ICalculatorService</span> <span class="token punctuation">{</span>
     <span class="token keyword">int</span> <span class="token function">mul</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>        
@@ -664,7 +666,7 @@
 <blockquote>
 <p>PalculatorAspec和CalculatorAspec都对目标方法进行了前置加强</p>
 </blockquote>
-<h2 id="AOP中相关概念释义"><a href="#AOP中相关概念释义" class="headerlink" title="AOP中相关概念释义"></a>AOP中相关概念释义</h2><p><img src="./images/loading.gif" data-original="https://img-blog.csdnimg.cn/20190717122638133.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dhbmdfZGFfYmluZw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="AOP中相关概念释义"><a href="#AOP中相关概念释义" class="headerlink" title="AOP中相关概念释义"></a>AOP中相关概念释义</h2><p><img src="/medias/loading.gif" data-original="https://img-blog.csdnimg.cn/20190717122638133.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dhbmdfZGFfYmluZw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <h2 id="切入点通配符详解"><a href="#切入点通配符详解" class="headerlink" title="切入点通配符详解"></a>切入点通配符详解</h2><p>Spring AOP支持如下三种通配符：</p>
 <ol>
 <li><p><em>：匹配任何数量字符，用于参数列表表示参数可以是任意数据类型，但是必须有参数，例子：<br>java.</em>.Date——&gt;匹配java包的下一级子包中的任何Date类型；如匹配java.util.Date、java.sql.Date，但不匹配java.util.sql.Date；<br>java.lang.*e——&gt;匹配任何java.lang包下的以e结尾的类型，如匹配java.util.Hashtable、java.util.Date等等；</p>
@@ -744,13 +746,13 @@
                     
                 </div>
                 <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
-                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/libs/share/css/share.min.css">
 
 <div id="article-share">
     
     
     <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-    <script src="/libs/share/js/social-share.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/libs/share/js/social-share.min.js"></script>
     
 
     
@@ -868,10 +870,10 @@
                         <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
                     </ul>
                     <div id="alipay">
-                        <img src="./images/loading.gif" data-original="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                        <img src="/medias/loading.gif" data-original="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
                     </div>
                     <div id="wechat">
-                        <img src="./images/loading.gif" data-original="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                        <img src="/medias/loading.gif" data-original="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
                     </div>
                 </div>
             </div>
@@ -889,8 +891,8 @@
     </div>
 
     
-        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
-<link rel="stylesheet" href="/css/my-gitalk.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/css/my-gitalk.css">
 
 <div class="card gitalk-card" data-aos="fade-up">
     <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
@@ -900,7 +902,7 @@
     <div id="gitalk-container" class="card-content"></div>
 </div>
 
-<script src="/libs/gitalk/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/libs/gitalk/gitalk.min.js"></script>
 <script>
     let gitalk = new Gitalk({
         clientID: '4df7639195a1fb04a904',
@@ -939,7 +941,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="./images/loading.gif" data-original="/medias/featureimages/6.jpg" class="responsive-img" alt="详解AOP的实现（五种增强方式）及执行流程">
+                        <img src="/medias/loading.gif" data-original="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/medias/featureimages/6.jpg" class="responsive-img" alt="详解AOP的实现（五种增强方式）及执行流程">
                         
                         <span class="card-title">详解AOP的实现（五种增强方式）及执行流程</span>
                     </div>
@@ -978,7 +980,7 @@ AOP的简单介绍AOP（Aspect Oriented Programming 面向切面编程）是一�
                     <div class="card-image">
                         
                         
-                        <img src="./images/loading.gif" data-original="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        <img src="/medias/loading.gif" data-original="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
                         
                         <span class="card-title">Hello World</span>
                     </div>
@@ -1013,21 +1015,21 @@ AOP的简单介绍AOP（Aspect Oriented Programming 面向切面编程）是一�
 
 
 <!-- 代码块功能依赖 -->
-<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/libs/codeBlock/codeBlockFuction.js"></script>
 
 <!-- 代码语言 -->
 
-<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/libs/codeBlock/codeLang.js"></script>
 
 
 <!-- 代码块复制 -->
 
-<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/libs/codeBlock/codeCopy.js"></script>
 
 
 <!-- 代码块收缩 -->
 
-<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/libs/codeBlock/codeShrink.js"></script>
 
 
 <!-- 代码块折行 -->
@@ -1055,7 +1057,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 </div>
 
 
-<script src="/libs/tocbot/tocbot.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/libs/tocbot/tocbot.min.js"></script>
 <script>
     $(function () {
         tocbot.init({
@@ -1139,7 +1141,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
     <footer class="page-footer bg-color">
     
-        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/libs/aplayer/APlayer.min.css">
 <style>
     .aplayer .aplayer-lrc p {
         font-size: 12px;
@@ -1183,7 +1185,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
     </div>
 </div>
 
-<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/libs/aplayer/APlayer.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
     
     <div class="container row center-align" style="margin-bottom: 0px !important;">
@@ -1263,10 +1265,10 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
     </div>
 </div>
 
-<script src="/js/search.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/js/search.js"></script>
 <script type="text/javascript">
 $(function () {
-    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+    searchFunc("https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/" + "search.xml", 'searchInput', 'searchResult');
 });
 </script>
     <!-- 回到顶部按钮 -->
@@ -1277,12 +1279,12 @@ $(function () {
 </div>
 
 
-    <script src="/libs/materialize/materialize.min.js"></script>
-    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
-    <script src="/libs/aos/aos.js"></script>
-    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
-    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
-    <script src="/js/matery.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/libs/materialize/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/libs/aos/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/js/matery.js"></script>
 
     <!-- Baidu Analytics -->
 
@@ -1303,10 +1305,10 @@ $(function () {
 </script>
 
     
-    <script src="/libs/others/clicklove.js" async="async"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/libs/others/clicklove.js" async="async"></script>
     
     
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    <script async src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/libs/others/busuanzi.pure.mini.js"></script>
     
 
     
@@ -1317,23 +1319,23 @@ $(function () {
     <script type="text/javascript" color="0,0,255"
         pointColor="0,0,255" opacity='0.7'
         zIndex="-1" count="99"
-        src="/libs/background/canvas-nest.js"></script>
+        src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/libs/background/canvas-nest.js"></script>
     
 
     
     
     <script type="text/javascript" size="150" alpha='0.6'
-        zIndex="-1" src="/libs/background/ribbon-refresh.min.js" async="async"></script>
+        zIndex="-1" src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/libs/background/ribbon-refresh.min.js" async="async"></script>
     
 
     
-    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/libs/background/ribbon-dynamic.js" async="async"></script>
     
     
     
-    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/libs/instantpage/instantpage.js" type="module"></script>
     
 
-<script>!function(e){var c=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){for(var r=0;r<c.length;r++)t=c[r],0<=(n=t.getBoundingClientRect()).bottom&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=c[r];t=o,n=function(){c=c.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}i(),e.addEventListener("scroll",function(){var t,n;t=i,n=e,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)})}(this);</script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script></body>
+<script>!function(e){var c=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){for(var r=0;r<c.length;r++)t=c[r],0<=(n=t.getBoundingClientRect()).bottom&&0<=n.left&&n.top<=(e.innerHeight+240||document.documentElement.clientHeight+240)&&function(){var t,n,e,i,o=c[r];t=o,n=function(){c=c.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}i(),e.addEventListener("scroll",function(){var t,n;t=i,n=e,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)})}(this);</script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script></body>
 
 </html>
