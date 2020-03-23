@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://laicize.github.io/"/>
-  <updated>2020-03-23T08:03:40.957Z</updated>
+  <updated>2020-03-23T14:02:24.215Z</updated>
   <id>http://laicize.github.io/</id>
   
   <author>
@@ -17,10 +17,34 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>详解AOP的实现（五种增强方式）及执行流程</title>
+    <link href="http://laicize.github.io/2020/03/23/xiang-jie-aop-de-shi-xian-wu-chong-zeng-qiang-fang-shi-ji-zhi-xing-liu-cheng/"/>
+    <id>http://laicize.github.io/2020/03/23/xiang-jie-aop-de-shi-xian-wu-chong-zeng-qiang-fang-shi-ji-zhi-xing-liu-cheng/</id>
+    <published>2020-03-23T14:02:44.407Z</published>
+    <updated>2020-03-23T14:02:24.215Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;@[toc]&lt;/p&gt;
+&lt;h1 id=&quot;AOP的简单介绍&quot;&gt;&lt;a href=&quot;#AOP的简单介绍&quot; class=&quot;headerlink&quot; title=&quot;AOP的简单介绍&quot;&gt;&lt;/a&gt;AOP的简单介绍&lt;/h1&gt;&lt;p&gt;AOP（Aspect Oriented Programming
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>Hello World</title>
     <link href="http://laicize.github.io/2020/03/23/hello-world/"/>
     <id>http://laicize.github.io/2020/03/23/hello-world/</id>
-    <published>2020-03-23T08:03:40.957Z</published>
+    <published>2020-03-23T14:00:29.543Z</published>
     <updated>2020-03-23T08:03:40.957Z</updated>
     
     <summary type="html">
