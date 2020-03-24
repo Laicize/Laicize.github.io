@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>文客</title>
+  
+  <subtitle>文客</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://www.wenke.ink/"/>
+  <updated>2020-03-24T09:01:30.015Z</updated>
+  <id>http://www.wenke.ink/</id>
+  
+  <author>
+    <name>菠菜</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>详解AOP的实现（五种增强方式）及执行流程</title>
+    <link href="http://www.wenke.ink/posts/46530.html"/>
+    <id>http://www.wenke.ink/posts/46530.html</id>
+    <published>2020-03-24T09:01:30.015Z</published>
+    <updated>2020-03-24T09:01:30.015Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;@[toc]&lt;/p&gt;
+&lt;h1 id=&quot;AOP的简单介绍&quot;&gt;&lt;a href=&quot;#AOP的简单介绍&quot; class=&quot;headerlink&quot; title=&quot;AOP的简单介绍&quot;&gt;&lt;/a&gt;AOP的简单介绍&lt;/h1&gt;&lt;p&gt;AOP（Aspect Oriented Programming
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://www.wenke.ink/posts/16107.html"/>
+    <id>http://www.wenke.ink/posts/16107.html</id>
+    <published>2020-03-24T09:01:30.011Z</published>
+    <updated>2020-03-24T09:01:30.011Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+</feed>
