@@ -2,12 +2,12 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>文客</title>
   
-  
+  <subtitle>丈量世界</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://laicize.github.io/"/>
+  <link href="http://www.wenke.ink/"/>
   <updated>2020-03-23T14:02:24.215Z</updated>
-  <id>http://laicize.github.io/</id>
+  <id>http://www.wenke.ink/</id>
   
   <author>
     <name>菠菜</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>详解AOP的实现（五种增强方式）及执行流程</title>
-    <link href="http://laicize.github.io/2020/03/23/xiang-jie-aop-de-shi-xian-wu-chong-zeng-qiang-fang-shi-ji-zhi-xing-liu-cheng/"/>
-    <id>http://laicize.github.io/2020/03/23/xiang-jie-aop-de-shi-xian-wu-chong-zeng-qiang-fang-shi-ji-zhi-xing-liu-cheng/</id>
+    <link href="http://www.wenke.ink/2020/03/23/xiang-jie-aop-de-shi-xian-wu-chong-zeng-qiang-fang-shi-ji-zhi-xing-liu-cheng/"/>
+    <id>http://www.wenke.ink/2020/03/23/xiang-jie-aop-de-shi-xian-wu-chong-zeng-qiang-fang-shi-ji-zhi-xing-liu-cheng/</id>
     <published>2020-03-23T14:02:44.407Z</published>
     <updated>2020-03-23T14:02:24.215Z</updated>
     
@@ -42,8 +42,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="http://laicize.github.io/2020/03/23/hello-world/"/>
-    <id>http://laicize.github.io/2020/03/23/hello-world/</id>
+    <link href="http://www.wenke.ink/2020/03/23/hello-world/"/>
+    <id>http://www.wenke.ink/2020/03/23/hello-world/</id>
     <published>2020-03-23T14:00:29.543Z</published>
     <updated>2020-03-23T08:03:40.957Z</updated>
     
