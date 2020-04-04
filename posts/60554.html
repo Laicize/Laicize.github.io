@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="详解AOP的实现（五种增强方式）及执行流程, 文客">
+    <meta name="keywords" content="[object Object], 文客">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>详解AOP的实现（五种增强方式）及执行流程 | 文客</title>
+    <title>[object Object] | 文客</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/libs/awesome/css/all.css">
@@ -309,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/medias/featureimages/6.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/medias/featureimages/8.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">详解AOP的实现（五种增强方式）及执行流程</h1>
+                    <h1 class="description center-align post-title">[object Object]</h1>
                 </div>
             </div>
         </div>
@@ -429,12 +429,29 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Spring/">
+                                <span class="chip bg-color">Spring</span>
+                            </a>
+                        
+                            <a href="/tags/aop/">
+                                <span class="chip bg-color">aop</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Java-web/" class="post-category">
+                                Java web
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -475,8 +492,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>@[toc]</p>
-<h1 id="AOP的简单介绍"><a href="#AOP的简单介绍" class="headerlink" title="AOP的简单介绍"></a>AOP的简单介绍</h1><p>AOP（Aspect Oriented Programming 面向切面编程）是一种通过运行期动态代理实现代码复用的机制，是对传统OOP(Object Oriented Programming，面向对象编程 )的补充。目前，Aspectj是Java社区里最完整最流行的AOP框架，在Spring 2.0以上版本中可以通过Aspectj注解或基于XML配置AOP。</p>
+                <h1 id="AOP的简单介绍"><a href="#AOP的简单介绍" class="headerlink" title="AOP的简单介绍"></a>AOP的简单介绍</h1><p>AOP（Aspect Oriented Programming 面向切面编程）是一种通过运行期动态代理实现代码复用的机制，是对传统OOP(Object Oriented Programming，面向对象编程 )的补充。目前，Aspectj是Java社区里最完整最流行的AOP框架，在Spring 2.0以上版本中可以通过Aspectj注解或基于XML配置AOP。</p>
 <h1 id="建立AOP实例工程"><a href="#建立AOP实例工程" class="headerlink" title="建立AOP实例工程"></a>建立AOP实例工程</h1><h2 id="工程结构如下图所示"><a href="#工程结构如下图所示" class="headerlink" title="工程结构如下图所示"></a>工程结构如下图所示</h2><p><img src="/medias/loading.gif" data-original="https://img-blog.csdnimg.cn/2019071614023511.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dhbmdfZGFfYmluZw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>ICalculatorService的源码如下：</strong></p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> com<span class="token punctuation">.</span>jd<span class="token punctuation">.</span>calculator<span class="token punctuation">;</span>
 <span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">ICalculatorService</span> <span class="token punctuation">{</span>
@@ -610,15 +626,21 @@
 <p> 注：1. 当目标方法抛出的异常与增强方法中的异常不满足继承关系时（增强方法中的异常必须为目标方法中的异常的父类），则异常增强不会触发。</p>
 <ol start="2">
 <li><p>上例中如果传入实参为0，和1，触发异常，但不会进行异常增强（ArithmeticException和NullPointerException不为继承关系） </p>
-<ol start="3">
-<li>@Before、@After、@AfterRunning和@AfterThrowing修饰的方法可以通过声明JoinPoint 类型参数变量获取目标方法的信息（方法名、参数列表等信息）；@Around修饰的方法必须声明ProceedingJoinPoint类型的参数，该变量可以决定是否执行目标方法；</li>
-<li>@Before,@After,@AfterReturning,@AfterThrowing执行顺序执行过程</li>
-</ol>
-<p>···java<br>try {<br> try {</p>
-<pre><code> doBefore();// @Before注解所修饰的方法
- method.invoke();// 执行目标对象内的方法</code></pre><p> } finally {</p>
-<pre><code> doAfter();// @After注解所修饰的方法</code></pre><p> }<br> doAfterReturning();// @AfterReturning注解所修饰的方法<br> } catch (Exception e) {</p>
-<pre><code> doAfterThrowing();// @AfterThrowing注解所修饰的方法</code></pre><p>}</p>
+</li>
+<li><p>@Before、@After、@AfterRunning和@AfterThrowing修饰的方法可以通过声明JoinPoint 类型参数变量获取目标方法的信息（方法名、参数列表等信息）；@Around修饰的方法必须声明ProceedingJoinPoint类型的参数，该变量可以决定是否执行目标方法；</p>
+</li>
+<li><p>@Before,@After,@AfterReturning,@AfterThrowing执行顺序执行过程</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">try</span> <span class="token punctuation">{</span>
+ <span class="token keyword">try</span> <span class="token punctuation">{</span>
+     <span class="token function">doBefore</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// @Before注解所修饰的方法</span>
+     method<span class="token punctuation">.</span><span class="token function">invoke</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// 执行目标对象内的方法</span>
+ <span class="token punctuation">}</span> <span class="token keyword">finally</span> <span class="token punctuation">{</span>
+     <span class="token function">doAfter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// @After注解所修饰的方法</span>
+ <span class="token punctuation">}</span>
+ <span class="token function">doAfterReturning</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// @AfterReturning注解所修饰的方法</span>
+ <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     <span class="token function">doAfterThrowing</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment" spellcheck="true">// @AfterThrowing注解所修饰的方法</span>
+<span class="token punctuation">}</span></code></pre>
 </li>
 </ol>
 </blockquote>
@@ -640,7 +662,7 @@
 </blockquote>
 <pre class=" language-java"><code class="language-java"><span class="token operator">&lt;</span>aop<span class="token operator">:</span>aspectj<span class="token operator">-</span>autoproxy proxy<span class="token operator">-</span>target<span class="token operator">-</span><span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"false"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>aop<span class="token operator">:</span>aspectj<span class="token operator">-</span>autoproxy<span class="token operator">></span></code></pre>
 <blockquote>
-<p> 配置自动代理，proxy-target-class=”false”：默认为false:即设置代理为jdk动态代理，若改为true，则  设置代理为cglib动态代理<br>Spring的jar包已经包括了cglib的asm和cglib的jar包，所以不需要引入这两个包即可使用cglib动态代理。</p>
+<p>配置自动代理，proxy-target-class=”false”：默认为false:即设置代理为jdk动态代理，若改为true，则  设置代理为cglib动态代理<br>Spring的jar包已经包括了cglib的asm和cglib的jar包，所以不需要引入这两个包即可使用cglib动态代理。</p>
 </blockquote>
 <h2 id="AOP-的执行流程"><a href="#AOP-的执行流程" class="headerlink" title="AOP 的执行流程"></a>AOP 的执行流程</h2><pre class=" language-java"><code class="language-java"><span class="token operator">&lt;</span>aop<span class="token operator">:</span>aspectj<span class="token operator">-</span>autoproxy proxy<span class="token operator">-</span>target<span class="token operator">-</span><span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"false"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>aop<span class="token operator">:</span>aspectj<span class="token operator">-</span>autoproxy<span class="token operator">></span></code></pre>
 <p>在执行以上配置时：找到Aspect注解的类（CalculatorAspect）–&gt;找到类中注解的方法获取注解属性值（@Before(“execution(int mul(int ,int))”)）–&gt;扫描所有类及类中方法–&gt;找到符合注解属性的方法–&gt;为该方法的类设置动态代理</p>
@@ -704,7 +726,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://www.wenke.ink/posts/46530.html">http://www.wenke.ink/posts/46530.html</a>
+                    <a href="http://www.wenke.ink/posts/60554.html">http://www.wenke.ink/posts/60554.html</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -741,7 +763,15 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/Spring/">
+                                    <span class="chip bg-color">Spring</span>
+                                </a>
+                            
+                                <a href="/tags/aop/">
+                                    <span class="chip bg-color">aop</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -927,40 +957,53 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/posts/46530.html">
+                <a href="/posts/60552.html">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/loading.gif" data-original="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/medias/featureimages/6.jpg" class="responsive-img" alt="详解AOP的实现（五种增强方式）及执行流程">
+                        <img src="/medias/loading.gif" data-original="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/medias/featureimages/8.jpg" class="responsive-img" alt="[object Object]">
                         
-                        <span class="card-title">详解AOP的实现（五种增强方式）及执行流程</span>
+                        <span class="card-title">[object Object]</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            @[toc]
-AOP的简单介绍AOP（Aspect Oriented Programming 面向切面编程）是一种通过运行期动态代理实现代码复用的机制，是对传统OOP(Object Oriented Programming，面向对象编程 )
+                            报文交换和分组交换的介绍
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-26
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-02
+                        </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            菠菜
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E8%B7%AF/" class="post-category">
+                                    计算机网路
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                        <span class="chip bg-color">计算机网络</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%8A%A5%E6%96%87%E4%BA%A4%E6%8D%A2-%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2/">
+                        <span class="chip bg-color">报文交换/分组交换</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -971,20 +1014,19 @@ AOP的简单介绍AOP（Aspect Oriented Programming 面向切面编程）是一�
                 本篇&nbsp;<i class="far fa-dot-circle"></i>
             </div>
             <div class="card">
-                <a href="/posts/46530.html">
+                <a href="/posts/60554.html">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/loading.gif" data-original="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/medias/featureimages/6.jpg" class="responsive-img" alt="详解AOP的实现（五种增强方式）及执行流程">
+                        <img src="/medias/loading.gif" data-original="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/medias/featureimages/8.jpg" class="responsive-img" alt="[object Object]">
                         
-                        <span class="card-title">详解AOP的实现（五种增强方式）及执行流程</span>
+                        <span class="card-title">[object Object]</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            @[toc]
-AOP的简单介绍AOP（Aspect Oriented Programming 面向切面编程）是一种通过运行期动态代理实现代码复用的机制，是对传统OOP(Object Oriented Programming，面向对象编程 )
+                            介绍aop的动态代理机制
                         
                     </div>
                     <div class="publish-info">
@@ -993,13 +1035,29 @@ AOP的简单介绍AOP（Aspect Oriented Programming 面向切面编程）是一�
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            菠菜
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Java-web/" class="post-category">
+                                    Java web
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
 
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Spring/">
+                        <span class="chip bg-color">Spring</span>
+                    </a>
+                    
+                    <a href="/tags/aop/">
+                        <span class="chip bg-color">aop</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1135,6 +1193,13 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 </main>
 
 
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
 
     <footer class="page-footer bg-color">
     
@@ -1195,7 +1260,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">2k</span>&nbsp;字
+                class="white-color">3.2k</span>&nbsp;字
             
             
             

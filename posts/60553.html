@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="friends, 文客">
+    <meta name="keywords" content="[object Object], 文客">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>friends | 文客</title>
+    <title>[object Object] | 文客</title>
     <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/libs/awesome/css/all.css">
@@ -309,12 +309,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/medias/featureimages/19.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/medias/featureimages/8.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">friends</h1>
+                    <h1 class="description center-align post-title">[object Object]</h1>
                 </div>
             </div>
         </div>
@@ -429,12 +429,29 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                                <span class="chip bg-color">计算机网络</span>
+                            </a>
+                        
+                            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%80%A7%E8%83%BD/">
+                                <span class="chip bg-color">计算机网络性能</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E8%B7%AF/" class="post-category">
+                                计算机网路
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -443,7 +460,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-03-23
+                    2020-04-04
                 </div>
                 
 
@@ -452,7 +469,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    573
                 </div>
                 
 
@@ -475,7 +492,108 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h2 id="计算机网络性能"><a href="#计算机网络性能" class="headerlink" title="计算机网络性能"></a>计算机网络性能</h2><h2 id="指标"><a href="#指标" class="headerlink" title="指标"></a>指标</h2><ol>
+<li>速率：数据传输速率或比特率</li>
+</ol>
+<p><img src="/medias/loading.gif" data-original="https://gitee.com/Laicize/images/raw/master/img/20200402163000.png" alt=""></p>
+<ol start="2">
+<li><p>带宽：原指信号具有的频率宽度（最高频率-最低频率）这里指数字信道传输的最高数据率，单位bps</p>
+</li>
+<li><p>时延：</p>
+<ol>
+<li>节点处理延迟（差错检测，确定输出链路，ms级消耗）</li>
+<li>排队延迟：路由器出现拥塞，等待输出链路可用</li>
+<li>传输延迟：l：分组长度，r：链路带宽（d=l/r）</li>
+<li>传播延迟：物理链路长度，信号传播速度</li>
+</ol>
+</li>
+<li><p>时延带宽积：= 传播时延*带宽）  </p>
+</li>
+<li><p>丢包率：丢包数/已发分组总数</p>
+</li>
+<li><p>吞吐量：发送端与接受端传送数据速率。</p>
+<ol>
+<li>即时吞吐量</li>
+<li>平均吞吐量</li>
+<li><img src="/medias/loading.gif" data-original="https://gitee.com/Laicize/images/raw/master/img/20200403151830.png" alt=""></li>
+<li><img src="/medias/loading.gif" data-original="https://gitee.com/Laicize/images/raw/master/img/20200403152041.png" alt=""></li>
+</ol>
+<h2 id="体系结构"><a href="#体系结构" class="headerlink" title="体系结构"></a>体系结构</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ol>
+<li>计算机网络体系结构：从功能上进行划分，是分层结构。</li>
+<li>每层遵循某些/个网络协议完成本层功能。</li>
+<li>计算机网络体系结构是计算机网络各层及协议的集合。</li>
+<li>基本概念：</li>
+</ol>
+<p>![image-20200403163800872](/Users/wang/Library/Application Support/typora-user-images/image-20200403163800872.png)</p>
+<blockquote>
+<p>透明：不关心实现过程</p>
+<p>不同层之间是服务与被服务的关系</p>
+</blockquote>
+<h3 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h3><ol>
+<li><p>OSI参考模型：理论成功，实践失败</p>
+<p><img src="/medias/loading.gif" data-original="https://gitee.com/Laicize/images/raw/master/img/20200403164332.png" alt=""></p>
+</li>
+</ol>
+</li>
+</ol>
+<p>​        例子：</p>
+<p><img src="/medias/loading.gif" data-original="https://gitee.com/Laicize/images/raw/master/img/20200403164714.png" alt=""></p>
+<blockquote>
+<p>实线：物理通信</p>
+<p>虚线：虚拟的传输，协议是对等的，水平的。</p>
+</blockquote>
+<p>通信过程：</p>
+<p><img src="/medias/loading.gif" data-original="https://gitee.com/Laicize/images/raw/master/img/20200403165419.png" alt=""></p>
+<p>数据封装：</p>
+<ol>
+<li>增加控制信息<ul>
+<li>构造协议数据单元（PDU）</li>
+</ul>
+</li>
+<li>控制信息：<ol>
+<li>地址：标识发送端/接收端</li>
+<li>差错检测编码：用于差错检测或纠正</li>
+<li>协议控制：实现协议功能的附加信息，eg：优先级，服务质量，安全控制。 </li>
+</ol>
+</li>
+</ol>
+<p>物理层功能:</p>
+<p><img src="/medias/loading.gif" data-original="https://gitee.com/Laicize/images/raw/master/img/20200403193225.png" alt=""></p>
+<p>数据链路层功能:</p>
+<p><img src="/medias/loading.gif" data-original="https://gitee.com/Laicize/images/raw/master/img/20200403193846.png" alt=""></p>
+<p><img src="/medias/loading.gif" data-original="https://gitee.com/Laicize/images/raw/master/img/20200403194302.png" alt=""></p>
+<p>网络层功能:</p>
+<p><img src="/medias/loading.gif" data-original="https://gitee.com/Laicize/images/raw/master/img/20200403194602.png" alt=""></p>
+<p><img src="/medias/loading.gif" data-original="https://gitee.com/Laicize/images/raw/master/img/20200403194836.png" alt=""></p>
+<p>传输层功能功能:</p>
+<p><img src="/medias/loading.gif" data-original="https://gitee.com/Laicize/images/raw/master/img/20200403195115.png" alt=""></p>
+<blockquote>
+<p>进程之间的通信,完整报文,端口的封装(加上端口号)</p>
+</blockquote>
+<p><img src="/medias/loading.gif" data-original="https://gitee.com/Laicize/images/raw/master/img/20200403195346.png" alt=""></p>
+<blockquote>
+<p>也能解决端到端的流量控制,差错控制,连接控制</p>
+</blockquote>
+<p>会话层功能功能:</p>
+<p><img src="/medias/loading.gif" data-original="https://gitee.com/Laicize/images/raw/master/img/20200403195710.png" alt=""></p>
+<blockquote>
+<p>不真实存在,不分组,插入同步点类似于断点续传</p>
+</blockquote>
+<p>表示层功能:</p>
+<p><img src="/medias/loading.gif" data-original="https://gitee.com/Laicize/images/raw/master/img/20200403195948.png" alt=""></p>
+<blockquote>
+<p>实际不独立存在(包含在应用层内),独立编码:与主机表示无关</p>
+</blockquote>
+<p>应用层功能功能</p>
+<p><img src="/medias/loading.gif" data-original="https://gitee.com/Laicize/images/raw/master/img/20200403200216.png" alt=""></p>
+<h2 id="TCP-IP参考模型"><a href="#TCP-IP参考模型" class="headerlink" title="TCP/IP参考模型"></a>TCP/IP参考模型</h2><p><img src="/medias/loading.gif" data-original="https://gitee.com/Laicize/images/raw/master/img/20200403200450.png" alt=""></p>
+<h2 id="五层参考模型"><a href="#五层参考模型" class="headerlink" title="五层参考模型"></a>五层参考模型</h2><p><img src="/medias/loading.gif" data-original="https://gitee.com/Laicize/images/raw/master/img/20200403201040.png" alt=""></p>
+<p>数据封装:</p>
+<p><img src="/medias/loading.gif" data-original="https://gitee.com/Laicize/images/raw/master/img/20200403201249.png" alt=""></p>
+<blockquote>
+<p>报文-&gt;段(拆分)-&gt;数据报-&gt;数据帧-&gt;比特流</p>
+</blockquote>
+
             </div>
             <hr/>
 
@@ -500,7 +618,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://www.wenke.ink/friends/index.html">http://www.wenke.ink/friends/index.html</a>
+                    <a href="http://www.wenke.ink/posts/60553.html">http://www.wenke.ink/posts/60553.html</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -537,7 +655,15 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                                    <span class="chip bg-color">计算机网络</span>
+                                </a>
+                            
+                                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%80%A7%E8%83%BD/">
+                                    <span class="chip bg-color">计算机网络性能</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -723,39 +849,53 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/friends/index.html">
+                <a href="/posts/60551.html">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/loading.gif" data-original="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/medias/featureimages/19.jpg" class="responsive-img" alt="friends">
+                        <img src="/medias/loading.gif" data-original="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/medias/featureimages/8.jpg" class="responsive-img" alt="[object Object]">
                         
-                        <span class="card-title">friends</span>
+                        <span class="card-title">[object Object]</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            web应用相关协议基础介绍
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-23
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-04
+                        </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            菠菜
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E8%B7%AF/" class="post-category">
+                                    计算机网路
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                        <span class="chip bg-color">计算机网络</span>
+                    </a>
+                    
+                    <a href="/tags/web%E5%BA%94%E7%94%A8%E5%8D%8F%E8%AE%AE/">
+                        <span class="chip bg-color">web应用协议</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -763,37 +903,52 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/friends/index.html">
+                <a href="/posts/60552.html">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/loading.gif" data-original="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/medias/featureimages/19.jpg" class="responsive-img" alt="friends">
+                        <img src="/medias/loading.gif" data-original="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io/medias/featureimages/8.jpg" class="responsive-img" alt="[object Object]">
                         
-                        <span class="card-title">friends</span>
+                        <span class="card-title">[object Object]</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            报文交换和分组交换的介绍
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-23
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-02
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            菠菜
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E8%B7%AF/" class="post-category">
+                                    计算机网路
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+                        <span class="chip bg-color">计算机网络</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%8A%A5%E6%96%87%E4%BA%A4%E6%8D%A2-%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2/">
+                        <span class="chip bg-color">报文交换/分组交换</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -928,6 +1083,13 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 </main>
 
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
 
 
     <footer class="page-footer bg-color">
