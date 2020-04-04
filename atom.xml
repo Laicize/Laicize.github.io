@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.wenke.ink/"/>
-  <updated>2020-04-04T06:24:21.544Z</updated>
+  <updated>2020-03-24T09:01:30.015Z</updated>
   <id>http://www.wenke.ink/</id>
   
   <author>
@@ -15,44 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>text</title>
-    <link href="http://www.wenke.ink/posts/51241.html"/>
-    <id>http://www.wenke.ink/posts/51241.html</id>
-    <published>2020-03-30T13:51:02.000Z</published>
-    <updated>2020-04-04T06:24:21.544Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://www.wenke.ink/posts/16107.html"/>
-    <id>http://www.wenke.ink/posts/16107.html</id>
-    <published>2020-03-26T08:34:07.476Z</published>
-    <updated>2020-03-24T09:01:30.011Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a
-        
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
   
   <entry>
     <title>详解AOP的实现（五种增强方式）及执行流程</title>
