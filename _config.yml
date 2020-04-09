@@ -13,7 +13,7 @@ timezone: ''
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://www.wenke.ink
+url: https://www.wenke.ink
 root: /
 permalink: posts/:abbrlink.html
 permalink_defaults:
@@ -121,8 +121,8 @@ feed:
 # hexo-baidu-url-submit  百度主动推送
 baidu_url_submit:
   count: 80 # 提交最新的一个链接
-  host: #blog.sky03.cn # 在百度站长平台中注册的域名
-  token: #xxxxxxx # 请注意这是您的秘钥， 所以请不要把博客源代码发布在公众仓库里!
+  host: https://www.wenke.ink # 在百度站长平台中注册的域名
+  token: siBkOla9ff5v8II6 # 请注意这是您的秘钥， 所以请不要把博客源代码发布在公众仓库里!
   path: baidu_urls.txt # 文本文档的地址， 新链接会保存在此文本文档里
 
 
@@ -137,10 +137,13 @@ deploy:
   repository: git@e.coding.net:wenke/wenke.git
   branch: master
 
+- type: baidu_url_submitter
+
 #lazyload
 lazyload:
   enable: true 
   onlypost: false  # 是否只对文章的图片做懒加载
   loadingImg: /medias/loading.gif
+
 
 
