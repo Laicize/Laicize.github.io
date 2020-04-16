@@ -1,7 +1,6 @@
 ---
 title: 我的ubuntu18.04必装软件
 author: 菠菜
-img: 'https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture'
 top: false
 cover: false
 coverImg: 'https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture'
@@ -289,7 +288,43 @@ sudo apt-get install albert
 
 > Albert类似MacOS的聚焦
 
-## 其他软件
+## 主题美化
+
+贴图镇楼
+
+![](https://gitee.com/Laicize/images/raw/master/img/a.png)
+
+```shell
+＃安装compize及cairo-dack(实现３ｄ效果的dock)，先运行comp[izｅ才可以有３ｄ的效果
+sudo apt-get install compiz-plugins
+sudo apt-get install compizconfig-settings-manager
+sudo add-apt-repository ppa:ricotz/docky
+sudo apt-get update
+sudo apt-get install cairo-dock cairo-dock-plug-ins
+＃安装苹果字体，微软字体直接复制到/usr/share/Fonts下即可
+git clone https://github.com/cstrap/monaco-font
+cd monaco-font
+./install-font-ubuntu.sh http://www.gringod.com/wp-upload/software/Fonts/Monaco_Linux.ttf
+
+```
+
+> 图标，主题优化从gnome主题网站下载，移到相应主题文件夹下即可．
+
+## 常用的gnome插件
+
+1. systerm-monitor:在topbar下显示系统状况
+2. user thenes:美化主题必用
+3. Hide top bar:自动隐藏topbar
+4. Ｃlipboard indicator:剪贴板增强工具
+5. Ｃoverflow alt-tab:３d切换应用
+
+### 预览神器（类似win下的onequick）
+
+```shell
+sudo apt install gnome-sushi
+```
+
+### 其他软件
 
 1. 浏览器
 
