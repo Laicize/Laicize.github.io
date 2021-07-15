@@ -1,0 +1,1563 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="标签: 事务的传播, 文客">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>标签: 事务的传播 | 文客</title>
+    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//css/matery.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//css/my.css">
+
+    <script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/jquery/jquery.min.js"></script>
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="文客" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+		   <div>
+	              
+	              <img src="/medias/loading.gif" data-original="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//medias/logo.png" class="logo-img" alt="LOGO">
+	              
+	              <span class="logo-span">文客</span>
+                   </div>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/loading.gif" data-original="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">文客</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/Laicize?tab=repositories" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/Laicize?tab=repositories" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    <div class="bg-cover pd-header about-cover">
+    <div class="container">
+    <div class="row">
+    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
+        <div class="brand">
+            <div class="title center-align">
+                
+                文客
+                
+            </div>
+
+            <div class="description center-align">
+                
+                <span id="subtitle"></span>
+                <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+                <script>
+                    var typed = new Typed("#subtitle", {
+                        strings: ['从来没有真正的绝境, 只有心灵的迷途','Never really desperate, only the lost of the soul'],
+                        startDelay: 300,
+                        typeSpeed: 100,
+                        loop: true,
+                        backSpeed: 50,
+                        showCursor: true
+                    });
+                </script>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // 每天切换 banner 图.  Switch banner image every day.
+    $('.bg-cover').css('background-image', 'url(https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//medias/banner/' + new Date().getDay() + '.jpg)');
+</script>
+
+
+    </div>
+</div>
+
+<main class="content">
+
+    
+
+<div id="tags" class="container chip-container">
+    <div class="card">
+        <div class="card-content">
+            <div class="tag-title center-align">
+                <i class="fas fa-tags"></i>&nbsp;&nbsp;文章标签
+            </div>
+            <div class="tag-chips">
+                
+                
+                <a href="/tags/%E5%8F%8C%E8%B6%B3%E5%AE%9E%E9%AA%8C%E5%AE%A4/" title="双足实验室: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="双足实验室" style="background-color: #F9EBEA;">双足实验室
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%EF%BC%91%EF%BC%98%E6%8E%A7%E5%88%B6%E7%BB%84%E8%80%83%E6%A0%B8/" title="１８控制组考核: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="１８控制组考核" style="background-color: #F5EEF8;">１８控制组考核
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/git%E5%85%A5%E9%97%A8/" title="-git入门: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="-git入门" style="background-color: #D5F5E3;">-git入门
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/JVM%E4%B8%AD%E7%9A%84%E5%A0%86/" title="JVM中的堆: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="JVM中的堆" style="background-color: #E8F8F5;">JVM中的堆
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/JVM/" title="JVM: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="JVM" style="background-color: #FEF9E7;">JVM
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/Bootstrapt%E5%85%A5%E9%97%A8/" title="Bootstrapt入门: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="Bootstrapt入门" style="background-color: #F8F9F9;">Bootstrapt入门
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E8%BD%AE%E6%92%AD%E5%9B%BE%EF%BC%8C%E5%AF%BC%E8%88%AA%E6%9D%A1%EF%BC%8C%E6%8C%89%E9%92%AE%EF%BC%8C%E8%A1%A8%E6%A0%BC%EF%BC%8C%E8%A1%A8%E5%8D%95%EF%BC%8C%E5%88%86%E9%A1%B5/" title="轮播图，导航条，按钮，表格，表单，分页: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="轮播图，导航条，按钮，表格，表单，分页" style="background-color: #82E0AA;">轮播图，导航条，按钮，表格，表单，分页
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E5%93%8D%E5%BA%94%E5%BC%8F%E5%B8%83%E5%B1%80/" title="响应式布局: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="响应式布局" style="background-color: #D7BDE2;">响应式布局
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/IDEA%E5%88%9D%E4%BD%93%E9%AA%8C/" title="IDEA初体验: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="IDEA初体验" style="background-color: #A3E4D7;">IDEA初体验
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/IDEA%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE/" title="IDEA的基本配置: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="IDEA的基本配置" style="background-color: #85C1E9;">IDEA的基本配置
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/JVM%E7%9A%84%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/" title="JVM的性能调优: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="JVM的性能调优" style="background-color: #F8C471;">JVM的性能调优
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/jmap%E7%9A%84%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3/" title="jmap的使用详解: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="jmap的使用详解" style="background-color: #F9E79F;">jmap的使用详解
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/Javascript/" title="Javascript: 2">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="Javascript" style="background-color: #85C1E9;">Javascript
+                        <span class="tag-length">2</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%9E%84%E5%BB%BA/" title="对象的构建: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="对象的构建" style="background-color: #D7BDE2;">对象的构建
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/Java%E5%85%A5%E9%97%A8/" title="Java入门: 34">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="Java入门" style="background-color: #F8F9F9;">Java入门
+                        <span class="tag-length">34</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/io%E6%B5%81%E4%B8%AD%E7%9A%84file%E7%B1%BB/" title="io流中的file类: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="io流中的file类" style="background-color: #FEF9E7;">io流中的file类
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/JDBC%E4%B8%AD%E7%9A%84properties%E6%96%87%E4%BB%B6/" title="JDBC中的properties文件: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="JDBC中的properties文件" style="background-color: #D7BDE2;">JDBC中的properties文件
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/JDBC%E4%B8%AD%E7%9A%84s%E6%89%B9%E5%A4%84%E7%90%86/" title="JDBC中的s批处理: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="JDBC中的s批处理" style="background-color: #FFF;">JDBC中的s批处理
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/JDBC%E4%B8%AD%E7%9A%84sql%E6%B3%A8%E5%85%A5/" title="JDBC中的sql注入: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="JDBC中的sql注入" style="background-color: #F5EEF8;">JDBC中的sql注入
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/JDBC%E4%B8%AD%E7%9A%84%E6%89%B9%E5%A4%84%E7%90%86/" title="JDBC中的批处理: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="JDBC中的批处理" style="background-color: #FFF;">JDBC中的批处理
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" title="Lambda表达式: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="Lambda表达式" style="background-color: #F8C471;">Lambda表达式
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/instenceof%E8%AF%AD%E6%B3%95/" title="instenceof语法: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="instenceof语法" style="background-color: #A3E4D7;">instenceof语法
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/log4j%E7%9A%84%E4%BD%BF%E7%94%A8/" title="log4j的使用: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="log4j的使用" style="background-color: #FEF9E7;">log4j的使用
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E4%BB%A3%E7%A0%81%E8%B0%83%E8%AF%95%EF%BC%88ecplise%EF%BC%89/" title="代码调试（ecplise）: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="代码调试（ecplise）" style="background-color: #FFF;">代码调试（ecplise）
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/" title="函数式接口: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="函数式接口" style="background-color: #82E0AA;">函数式接口
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E5%8F%8D%E5%B0%84/" title="反射: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="反射" style="background-color: #D5F5E3;">反射
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E5%BC%82%E5%B8%B8%E7%9A%84%E5%A4%84%E7%90%86/" title="异常的处理: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="异常的处理" style="background-color: #F5EEF8;">异常的处理
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E6%8A%BD%E8%B1%A1%E7%B1%BB/" title="抽象类: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="抽象类" style="background-color: #F9E79F;">抽象类
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E6%8E%A5%E5%8F%A3/" title="接口: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="接口" style="background-color: #F5EEF8;">接口
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E5%92%8C%E8%BF%90%E7%94%A8/" title="线程的基本概念和运用: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="线程的基本概念和运用" style="background-color: #A3E4D7;">线程的基本概念和运用
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E8%87%AA%E5%8A%A8%E6%8B%86%E8%A3%85%E7%AE%B1/" title="自动拆装箱: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="自动拆装箱" style="background-color: #E8F8F5;">自动拆装箱
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/List%E6%8E%A5%E5%8F%A3/" title="List接口: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="List接口" style="background-color: #82E0AA;">List接口
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/" title="集合框架: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="集合框架" style="background-color: #F5EEF8;">集合框架
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/Set%E9%9B%86%E5%90%88/" title="Ｓet集合: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="Ｓet集合" style="background-color: #D5F5E3;">Ｓet集合
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E9%87%8D%E5%86%99%E4%BA%86equals-%E5%92%8Chashcode-%E6%96%B9%E6%B3%95/" title="重写了equals()和ｈashcode()方法: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="重写了equals()和ｈashcode()方法" style="background-color: #85C1E9;">重写了equals()和ｈashcode()方法
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/Map%E9%9B%86%E5%90%88/" title="Map集合: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="Map集合" style="background-color: #D5F5E3;">Map集合
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E9%9B%86%E5%90%88%E5%B7%A5%E5%85%B7%E7%B1%BB/" title="集合工具类: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="集合工具类" style="background-color: #D5F5E3;">集合工具类
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/Linux%E5%85%A5%E9%97%A8/" title="Linux入门: 9">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="Linux入门" style="background-color: #FFF;">Linux入门
+                        <span class="tag-length">9</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/grep/" title="grep: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="grep" style="background-color: #F5EEF8;">grep
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" title="正则表达式: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="正则表达式" style="background-color: #FFF;">正则表达式
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/tar/" title="tar: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="tar" style="background-color: #D5F5E3;">tar
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E6%89%93%E5%8C%85%E5%8E%8B%E7%BC%A9/" title="打包压缩: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="打包压缩" style="background-color: #F9E79F;">打包压缩
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/vim/" title="vim: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="vim" style="background-color: #85C1E9;">vim
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E5%88%9B%E5%BB%BA%E5%A4%8D%E5%88%B6%E6%96%87%E4%BB%B6/" title="创建复制文件: 2">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="创建复制文件" style="background-color: #A3E4D7;">创建复制文件
+                        <span class="tag-length">2</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E6%9F%A5%E6%89%BE%E6%96%87%E4%BB%B6%E7%9B%AE%E5%BD%95%EF%BC%88find-tail-head-cat-more-less%E5%91%BD%E4%BB%A4%EF%BC%89/" title="查找文件目录（find,tail,head,cat,more,less命令）: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="查找文件目录（find,tail,head,cat,more,less命令）" style="background-color: #F9E79F;">查找文件目录（find,tail,head,cat,more,less命令）
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90/" title="用户权限: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="用户权限" style="background-color: #F9E79F;">用户权限
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E7%9B%AE%E5%BD%95%E4%BB%8B%E7%BB%8D/" title="目录介绍: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="目录介绍" style="background-color: #F8C471;">目录介绍
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/Mybatis%E4%B8%8ESpring/" title="Mybatis与Spring: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="Mybatis与Spring" style="background-color: #F9EBEA;">Mybatis与Spring
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E7%AE%80%E5%8D%95%E5%B7%A5%E7%A8%8B%E6%90%AD%E5%BB%BA/" title="简单工程搭建: 2">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="简单工程搭建" style="background-color: #F5EEF8;">简单工程搭建
+                        <span class="tag-length">2</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/mysql%E5%85%A5%E9%97%A8/" title="mysql入门: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="mysql入门" style="background-color: #D7BDE2;">mysql入门
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/mysql%E5%85%A5%E9%97%A8%E4%B9%8B%E5%AD%97%E6%AE%B5%E7%B1%BB%E5%9E%8B/" title="mysql入门之字段类型: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="mysql入门之字段类型" style="background-color: #85C1E9;">mysql入门之字段类型
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" title="个人博客: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="个人博客" style="background-color: #FFF;">个人博客
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/next%E4%B8%BB%E9%A2%98/" title="ｎｅｘｔ主题: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="ｎｅｘｔ主题" style="background-color: #F5EEF8;">ｎｅｘｔ主题
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E8%8B%B1%E4%BC%9F%E8%BE%BE%E6%98%BE%E5%8D%A1/" title="英伟达显卡: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="英伟达显卡" style="background-color: #D7BDE2;">英伟达显卡
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/Dell%E6%B8%B8%E5%8C%A3/" title="Ｄｅｌｌ游匣: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="Ｄｅｌｌ游匣" style="background-color: #F9EBEA;">Ｄｅｌｌ游匣
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/win%EF%BC%91%EF%BC%90%E5%92%8Cubuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F/" title="win１０和ubuntu双系统: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="win１０和ubuntu双系统" style="background-color: #F5EEF8;">win１０和ubuntu双系统
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/Mysql%E5%85%A5%E9%97%A8-%EF%BC%8D%E8%A1%A8%E7%9A%84%E6%93%8D%E4%BD%9C/" title="-Mysql入门 －表的操作: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="-Mysql入门 －表的操作" style="background-color: #85C1E9;">-Mysql入门 －表的操作
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E4%BA%8B%E5%8A%A1%E7%9A%84%E4%BC%A0%E6%92%AD/" title="事务的传播: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-active "
+                            data-tagname="事务的传播" style="background-color: #A3E4D7;">事务的传播
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E4%BA%8B%E5%8A%A1%E7%9A%84%E6%B3%A8%E8%A7%A3/" title="事务的注解: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="事务的注解" style="background-color: #85C1E9;">事务的注解
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E6%9C%BA%E5%88%B6/" title="事务的隔离机制: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="事务的隔离机制" style="background-color: #A3E4D7;">事务的隔离机制
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/IDEA%E5%B7%A5%E5%85%B7/" title="IDEA工具: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="IDEA工具" style="background-color: #85C1E9;">IDEA工具
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" title="快捷键: 2">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="快捷键" style="background-color: #FEF9E7;">快捷键
+                        <span class="tag-length">2</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/io%E6%B5%81%E4%B8%AD%E7%9A%84%E6%B5%81/" title="io流中的流　: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="io流中的流　" style="background-color: #A3E4D7;">io流中的流　
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/String%E5%AD%97%E7%AC%A6%E4%B8%B2/" title="String字符串: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="String字符串" style="background-color: #D5F5E3;">String字符串
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E4%BB%A3%E7%A0%81%E5%9D%97%E5%92%8C%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F/" title="代码块和全局变量: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="代码块和全局变量" style="background-color: #F9EBEA;">代码块和全局变量
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E5%A4%9A%E6%80%81/" title="多态: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="多态" style="background-color: #A3E4D7;">多态
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E5%AF%B9%E8%B1%A1%E5%92%8C%E7%B1%BB/" title="对象和类: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="对象和类" style="background-color: #F8C471;">对象和类
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E6%96%B9%E6%B3%95%E5%92%8C%E9%87%8D%E8%BD%BD/" title="方法和重载: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="方法和重载" style="background-color: #FEF9E7;">方法和重载
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E7%BB%A7%E6%89%BF/" title="继承: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="继承" style="background-color: #A3E4D7;">继承
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E9%87%8D%E5%86%99/" title="重写: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="重写" style="background-color: #A3E4D7;">重写
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%8A%E5%9F%BA%E6%9C%AC%E8%BF%90%E7%AE%97%E7%AC%A6%E5%8F%8A%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2/" title="基本数据类型及基本运算符及进制转换: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="基本数据类型及基本运算符及进制转换" style="background-color: #F8F9F9;">基本数据类型及基本运算符及进制转换
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E6%95%B0%E7%BB%84/" title="数组: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="数组" style="background-color: #F9EBEA;">数组
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E5%88%86%E6%94%AF%E8%AF%AD%E5%8F%A5/" title="分支语句: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="分支语句" style="background-color: #85C1E9;">分支语句
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E5%92%8C%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" title="冒泡排序和插入排序: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="冒泡排序和插入排序" style="background-color: #D5F5E3;">冒泡排序和插入排序
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E4%BA%8C%E5%88%86%E6%B3%95%E6%9F%A5%E6%89%BE%EF%BC%88%E6%88%96%E6%89%BE%E6%96%B0%E5%85%83%E7%B4%A0%E7%9A%84%E4%BD%8D%E7%BD%AE%EF%BC%89/" title="二分法查找（或找新元素的位置）: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="二分法查找（或找新元素的位置）" style="background-color: #F9E79F;">二分法查找（或找新元素的位置）
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/linux%E5%85%A5%E9%97%A8/" title="linux入门: 2">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="linux入门" style="background-color: #A3E4D7;">linux入门
+                        <span class="tag-length">2</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/vi%E7%BC%96%E8%BE%91%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8/" title="vi编辑器的使用: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="vi编辑器的使用" style="background-color: #F8C471;">vi编辑器的使用
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/shell%E8%84%9A%E6%9C%AC/" title="shell脚本: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="shell脚本" style="background-color: #85C1E9;">shell脚本
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E5%BC%80%E6%9C%BA%E8%87%AA%E5%8A%A8%E9%93%BE%E6%8E%A5%E6%A0%A1%E5%9B%AD%E7%BD%91%E6%9C%AC%E6%96%87/" title="开机自动链接校园网本文: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="开机自动链接校园网本文" style="background-color: #FFF;">开机自动链接校园网本文
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/ubuntu18-04/" title="ubuntu18.04: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="ubuntu18.04" style="background-color: #F8F9F9;">ubuntu18.04
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E5%A4%87%E4%BB%BD/" title="备份: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="备份" style="background-color: #E8F8F5;">备份
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" title="计算机基础: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="计算机基础" style="background-color: #E8F8F5;">计算机基础
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/Python%E5%85%A5%E9%97%A8/" title="Python入门: 4">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="Python入门" style="background-color: #D5F5E3;">Python入门
+                        <span class="tag-length">4</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E6%96%87%E6%9C%AC%E8%BF%9B%E5%BA%A6%E6%9D%A1/" title="文本进度条: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="文本进度条" style="background-color: #D5F5E3;">文本进度条
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E8%92%99%E7%89%B9%E5%8D%A1%E7%BD%97%E6%B1%82%E5%9C%86%E5%91%A8%E7%8E%87/" title="蒙特卡罗求圆周率: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="蒙特卡罗求圆周率" style="background-color: #D5F5E3;">蒙特卡罗求圆周率
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E8%9F%92%E8%9B%87%E7%BB%98%E5%88%B6/" title="蟒蛇绘制: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="蟒蛇绘制" style="background-color: #F9EBEA;">蟒蛇绘制
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" title="计算机网络: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="计算机网络" style="background-color: #A3E4D7;">计算机网络
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/" title="网络层: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="网络层" style="background-color: #F8F9F9;">网络层
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/Mybatis/" title="Mybatis: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="Mybatis" style="background-color: #A3E4D7;">Mybatis
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E8%A3%85%E6%9C%BA/" title="装机: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="装机" style="background-color: #FEF9E7;">装机
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E8%BD%AF%E4%BB%B6/" title="软件: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="软件" style="background-color: #A3E4D7;">软件
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" title="计算机操作系统: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="计算机操作系统" style="background-color: #F8C471;">计算机操作系统
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/Linux%E5%86%85%E6%A0%B8/" title="Linux内核: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="Linux内核" style="background-color: #D7BDE2;">Linux内核
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8/" title="系统启动: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="系统启动" style="background-color: #F8F9F9;">系统启动
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/JVM%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/" title="JVM性能调优: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="JVM性能调优" style="background-color: #D5F5E3;">JVM性能调优
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E7%BA%BF%E7%A8%8B%E6%B6%88%E8%80%97CPU%E7%9A%84%E8%B5%84%E6%BA%90/" title="线程消耗CPU的资源: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="线程消耗CPU的资源" style="background-color: #A3E4D7;">线程消耗CPU的资源
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%85%A5%E9%97%A8/" title="计算机入门: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="计算机入门" style="background-color: #FEF9E7;">计算机入门
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E5%8E%9F%E7%90%86/" title="系统启动原理: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="系统启动原理" style="background-color: #D7BDE2;">系统启动原理
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/AOP%E7%9A%84%E5%AE%9E%E7%8E%B0/" title="AOP的实现: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="AOP的实现" style="background-color: #F8F9F9;">AOP的实现
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/AOP%E7%9A%84%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B/" title="AOP的执行流程: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="AOP的执行流程" style="background-color: #FEF9E7;">AOP的执行流程
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/jdk%E5%92%8Ccglib%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/" title="jdk和cglib动态代理: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="jdk和cglib动态代理" style="background-color: #F9E79F;">jdk和cglib动态代理
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/" title="源码分析: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="源码分析" style="background-color: #E8F8F5;">源码分析
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/%E6%B8%A9%E5%BA%A6%E8%BD%AC%E6%8D%A2%E5%AE%9E%E4%BE%8B/" title="温度转换实例: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="温度转换实例" style="background-color: #FEF9E7;">温度转换实例
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/linux%E9%80%9A%E8%BF%87%E9%94%90%E6%8D%B7%E8%BF%9E%E6%8E%A5%E6%A0%A1%E5%9B%AD%E7%BD%91/" title="ｌinux通过锐捷连接校园网: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="ｌinux通过锐捷连接校园网" style="background-color: #F5EEF8;">ｌinux通过锐捷连接校园网
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/Mysql%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE/" title="-Mysql修改数据: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="-Mysql修改数据" style="background-color: #F5EEF8;">-Mysql修改数据
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/Mysql%E5%85%A5%E9%97%A8-%EF%BC%8D%E7%AE%80%E4%BB%8B/" title="-Mysql入门 －简介: 1">
+                    <span class="chip center-align waves-effect waves-light
+                             chip-default "
+                            data-tagname="-Mysql入门 －简介" style="background-color: #D5F5E3;">-Mysql入门 －简介
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <article id="articles" class="container articles">
+        <div class="row tags-posts">
+            
+            
+            <div class="article tag-post col s12 m6 l4" data-tags="事务的传播, 事务的注解, 事务的隔离机制" data-aos="fade-up">
+                <div class="card">
+                    <a href="/posts/46560.html">
+                        <div class="card-image tag-image">
+                            
+                            
+                            <img src="/medias/loading.gif" data-original="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//medias/featureimages/7.jpg" class="responsive-img" alt="SpringMVC之事务详解">
+                            
+                            <span class="card-title">SpringMVC之事务详解</span>
+                        </div>
+                    </a>
+                    <div class="card-content article-content">
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-15
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/SpringMVC/" class="post-category">
+                                SpringMVC
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </article>
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2017</span>
+            <a href="https://www.wenke.ink" target="_blank">菠菜</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">69.3k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/Laicize?tab=repositories" class="tooltipped" target="https://github.com/Laicize/" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:wangwenzhong12@gmail.com" class="tooltipped" target="wangwenzhong12@gmail.com" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2665268424" class="tooltipped" target="2665268424" data-tooltip="QQ联系我: 2665268424" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/materialize/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/aos/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/background/canvas-nest.js"></script>
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/background/ribbon-refresh.min.js" async="async"></script>
+    
+
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/background/ribbon-dynamic.js" async="async"></script>
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/instantpage/instantpage.js" type="module"></script>
+    
+
+<script>!function(e){var c=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){for(var r=0;r<c.length;r++)t=c[r],0<=(n=t.getBoundingClientRect()).bottom&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=c[r];t=o,n=function(){c=c.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}i(),e.addEventListener("scroll",function(){var t,n;t=i,n=e,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)})}(this);</script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script></body>
+
+</html>

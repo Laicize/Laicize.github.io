@@ -1,0 +1,1404 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="SpringMVC之事务详解, 文客">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>SpringMVC之事务详解 | 文客</title>
+    <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//css/matery.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//css/my.css">
+
+    <script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/jquery/jquery.min.js"></script>
+    
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="文客" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+		   <div>
+	              
+	              <img src="/medias/loading.gif" data-original="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//medias/logo.png" class="logo-img" alt="LOGO">
+	              
+	              <span class="logo-span">文客</span>
+                   </div>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/loading.gif" data-original="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">文客</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/Laicize?tab=repositories" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/Laicize?tab=repositories" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//medias/featureimages/7.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">SpringMVC之事务详解</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E4%BA%8B%E5%8A%A1%E7%9A%84%E4%BC%A0%E6%92%AD/">
+                                <span class="chip bg-color">事务的传播</span>
+                            </a>
+                        
+                            <a href="/tags/%E4%BA%8B%E5%8A%A1%E7%9A%84%E6%B3%A8%E8%A7%A3/">
+                                <span class="chip bg-color">事务的注解</span>
+                            </a>
+                        
+                            <a href="/tags/%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E6%9C%BA%E5%88%B6/">
+                                <span class="chip bg-color">事务的隔离机制</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/SpringMVC/" class="post-category">
+                                SpringMVC
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-07-15
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    4.2k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    16 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="一-Spring实现事务管理的两种方式："><a href="#一-Spring实现事务管理的两种方式：" class="headerlink" title="一. Spring实现事务管理的两种方式："></a>一. Spring实现事务管理的两种方式：</h2><h3 id="1-编程式事务管理："><a href="#1-编程式事务管理：" class="headerlink" title="1. 编程式事务管理："></a>1. 编程式事务管理：</h3><p>将事务管理代码嵌入到业务方法中来控制事务的提交和回滚，在编程式管理事务中，必须在每个事务操作中包含额外的事务管理代码。</p>
+<h3 id="2-声明式事务管理（推荐）："><a href="#2-声明式事务管理（推荐）：" class="headerlink" title="2. 声明式事务管理（推荐）："></a>2. 声明式事务管理（推荐）：</h3><p>大多数情况下比编程式事务管理更好用，它将事务管理代码从业务方法中分离出来，以声明的方式来实现事务管理，Spring声明式事务管理建立在AOP基础之上，是一个典型的横切关注点，通过环绕增强来实现，其原理是对方法前后进行拦截，然后在目标方法开始之前创建或加入一个事务，在执行完毕之后根据执行情况提交或回滚事务，其模型如下：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> Object <span class="token function">around</span><span class="token punctuation">(</span>ProceedingJoinPoint joinPoint<span class="token punctuation">)</span> <span class="token keyword">throws</span> Throwable <span class="token punctuation">{</span>
+    <span class="token keyword">try</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//开启事务</span>
+        <span class="token keyword">return</span> joinPoint<span class="token punctuation">.</span><span class="token function">proceed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">//提交事务</span>
+    <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Throwable</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//回滚事务</span>
+        <span class="token keyword">throw</span> e<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token keyword">finally</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//释放资源</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<h2 id="二：实现声明式事务配置的步骤"><a href="#二：实现声明式事务配置的步骤" class="headerlink" title="二：实现声明式事务配置的步骤"></a>二：实现声明式事务配置的步骤</h2><ol>
+<li><p>添加spring-aspects-4.3.10.RELEASE.jar包。</p>
+</li>
+<li><p>在Spring配置文件中添加如下配置：</p>
+<pre class=" language-java"><code class="language-java"><span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span>对jd包下的类进行扫描<span class="token operator">--</span><span class="token operator">></span>
+<span class="token operator">&lt;</span>context<span class="token operator">:</span>component<span class="token operator">-</span>scan base<span class="token operator">-</span><span class="token keyword">package</span><span class="token operator">=</span><span class="token string">"com.jd"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>context<span class="token operator">:</span>component<span class="token operator">-</span>scan<span class="token operator">></span>
+<span class="token operator">&lt;</span>aop<span class="token operator">:</span>aspectj<span class="token operator">-</span>autoproxy proxy<span class="token operator">-</span>target<span class="token operator">-</span><span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"true"</span> <span class="token operator">/</span><span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span>数据库连接池及其相关设置<span class="token operator">--</span><span class="token operator">></span>
+<span class="token operator">&lt;</span>bean id<span class="token operator">=</span><span class="token string">"dataSource"</span> <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"com.zaxxer.hikari.HikariDataSource"</span> destroy<span class="token operator">-</span>method<span class="token operator">=</span><span class="token string">"close"</span><span class="token operator">></span>
+ <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"driverClassName"</span> value<span class="token operator">=</span><span class="token string">"com.mysql.jdbc.Driver"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>property<span class="token operator">></span>
+ <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"jdbcUrl"</span> value<span class="token operator">=</span><span class="token string">"jdbc:mysql://127.0.0.1:3306/test?characterEncoding=utf8"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>property<span class="token operator">></span>
+ <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"username"</span> value<span class="token operator">=</span><span class="token string">"root"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>property<span class="token operator">></span>
+ <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"password"</span> value<span class="token operator">=</span><span class="token string">"root"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>property<span class="token operator">></span>
+ <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> 连接只读数据库时配置为<span class="token boolean">true</span>， 保证安全 <span class="token operator">--</span><span class="token operator">></span>
+ <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"readOnly"</span> value<span class="token operator">=</span><span class="token string">"false"</span> <span class="token operator">/</span><span class="token operator">></span> 
+ <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> 等待连接池分配连接的最大时长（毫秒），超过这个时长还没可用的连接则发生SQLException， 缺省<span class="token operator">:</span><span class="token number">30</span>秒 <span class="token operator">--</span><span class="token operator">></span>
+ <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"connectionTimeout"</span> value<span class="token operator">=</span><span class="token string">"30000"</span> <span class="token operator">/</span><span class="token operator">></span> 
+ <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> 一个连接idle状态的最大时长（毫秒），超时则被释放（retired），缺省<span class="token operator">:</span><span class="token number">10</span>分钟 <span class="token operator">--</span><span class="token operator">></span>
+ <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"idleTimeout"</span> value<span class="token operator">=</span><span class="token string">"600000"</span> <span class="token operator">/</span><span class="token operator">></span> 
+ <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> 一个连接的生命时长（毫秒），超时而且没被使用则被释放（retired），缺省<span class="token operator">:</span><span class="token number">30</span>分钟，建议设置比数据库超时时长少<span class="token number">30</span>秒，参考MySQL wait_timeout参数（show variables like <span class="token string">'%timeout%'</span><span class="token punctuation">;</span>） <span class="token operator">--</span><span class="token operator">></span>
+ <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"maxLifetime"</span> value<span class="token operator">=</span><span class="token string">"1800000"</span> <span class="token operator">/</span><span class="token operator">></span> 
+ <span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> 连接池中允许的最大连接数。缺省值：<span class="token number">10</span>；推荐的公式：<span class="token punctuation">(</span><span class="token punctuation">(</span>core_count <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">+</span> effective_spindle_count<span class="token punctuation">)</span> <span class="token operator">--</span><span class="token operator">></span>
+ <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"maximumPoolSize"</span> value<span class="token operator">=</span><span class="token string">"15"</span> <span class="token operator">/</span><span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>bean<span class="token operator">></span>
+<span class="token operator">&lt;</span>bean <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"org.springframework.jdbc.core.JdbcTemplate"</span><span class="token operator">></span>
+ <span class="token operator">&lt;</span>property name<span class="token operator">=</span><span class="token string">"dataSource"</span> ref<span class="token operator">=</span><span class="token string">"dataSource"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>property<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>bean<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> 配置事务管理器 <span class="token operator">--</span><span class="token operator">></span>
+<span class="token operator">&lt;</span>bean id<span class="token operator">=</span><span class="token string">"transactionManager"</span>
+ <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"org.springframework.jdbc.datasource.DataSourceTransactionManager"</span>
+ p<span class="token operator">:</span>dataSource<span class="token operator">-</span>ref<span class="token operator">=</span><span class="token string">"dataSource"</span><span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>bean<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> 启用事务注解 <span class="token operator">--</span><span class="token operator">></span>
+<span class="token operator">&lt;</span>tx<span class="token operator">:</span>annotation<span class="token operator">-</span>driven transaction<span class="token operator">-</span>manager<span class="token operator">=</span><span class="token string">"transactionManager"</span> <span class="token operator">/</span><span class="token operator">></span></code></pre>
+<blockquote>
+<p>注：（1）：该配置只为application.xml文件中部分相关配置。（2）：一个类含有@Transactional注解修饰的方法，则Spring框架自动为该类创建代理对象，默认使用JDK创建代理对象，可以通过添加&lt;aop:aspectj-autoproxy proxy-target-class=”true”/&gt;使用CGLib创建代理对象，此时需要添加aspectjweaver-x.x.x.jar包。</p>
+</blockquote>
+</li>
+<li><p>在Service层public方法上添加事务注解——@Transactional</p>
+<blockquote>
+<p>注： 不能在protected、默认或者private的方法上使用@Transactional注解，否则无效。</p>
+</blockquote>
+<h2 id="三-Transactional注解属性"><a href="#三-Transactional注解属性" class="headerlink" title="三: @Transactional注解属性"></a>三: @Transactional注解属性</h2><h3 id="1-rollbackFor和rollbackForClassName"><a href="#1-rollbackFor和rollbackForClassName" class="headerlink" title="1. rollbackFor和rollbackForClassName"></a>1. rollbackFor和rollbackForClassName</h3></li>
+<li><p>释义：指定对哪些异常回滚事务。默认情况下，如果在事务中抛出了运行时异常（继承自RuntimeException异常类），则回滚事务；如果没有抛出任何异常，或者抛出了检查时异常，则依然提交事务。这种处理方式是大多数开发者希望的处理方式，也是 EJB 中的默认处理方式；但可以根据需要人为控制事务在抛出某些运行时异常时仍然提交事务，或者在抛出某些检查时异常时回滚事务.<br>运行时异常的回滚实例：<br><img src="/medias/loading.gif" data-original="https://raw.githubusercontent.com/Laicize/wenke_images/master/img/20190714232651.png" alt="运行时异常的回滚实例"></p>
+<blockquote>
+<p>注：书籍表中有50本书籍，每本书10元，一个人钱包有1元，欲买50本，则该行代码抛出MoneyException异常，但由于该异常为运行时异常，所以回滚数据。<br>检查时异常通过rollbackFor和rollbackForClassName确定回滚异常的回滚实例<br>！<a href="https://raw.githubusercontent.com/Laicize/wenke_images/master/img/20190715080733.png" target="_blank" rel="noopener"></a><br>注：书籍表中有50本书籍，每本书10元，一个人钱包有1元，欲买50本，则该行代码抛出MoneyException异常，但由于该异常为检查时异常，所以若无@Transactional(rollbackFor=MoneyException.class)则不进行回滚<br>通过@Transactional(rollbackFor=MoneyException.class)确定出现MoneyException的检查时异常时依然回滚。<br>上例代码不能try-catch处理检查时异常（已捕获异常，异常不在上传），否则即便@Transactional注解中添加了rollbackFor=MoneyException.class，事务也不会回滚，如下代码：<br><img src="/medias/loading.gif" data-original="https://raw.githubusercontent.com/Laicize/wenke_images/master/img/20190715081415.png" alt=""><br>注：籍表中有50本书籍，每本书10元，一个人钱包有1元，欲买50本，则该行代码抛出MoneyException异常，尽管该异常为检查时异常，且@Transactional注解中添加了rollbackFor=MoneyExcepti</p>
+</blockquote>
+<h3 id="2-noRollbackFor和noRollbackForClassName"><a href="#2-noRollbackFor和noRollbackForClassName" class="headerlink" title="2.noRollbackFor和noRollbackForClassName"></a>2.noRollbackFor和noRollbackForClassName</h3></li>
+<li><p>释义：指定对哪些异常不回滚事务。</p>
+<blockquote>
+<p>注：原理同上</p>
+</blockquote>
+<h3 id="3-readOnly"><a href="#3-readOnly" class="headerlink" title="3. readOnly"></a>3. readOnly</h3></li>
+<li><p>释义;事务只读，指对事务性资源进行只读操作。所谓事务性资源就是指那些被事务管理的资源，比如数据源、 JMS 资源，以及自定义的事务性资源等等。如果确定只对事务性资源进行只读操作，那么可以将事务标志为只读的，以提高事务处理的性能。在 TransactionDefinition 中以 boolean 类型来表示该事务是否只读。由于只读的优化措施是在一个事务启动时由后端数据库实施的， 因此，只有对于那些具有可能启动一个新事务的传播行为（PROPAGATION_REQUIRES_NEW、PROPAGATION_REQUIRED、 ROPAGATION_NESTED）的方法来说，将事务声明为只读才有意义。<br>实例如下：<br>！<a href="https://raw.githubusercontent.com/Laicize/wenke_images/master/img/20190715082126.png" target="_blank" rel="noopener"></a></p>
+</li>
+</ol>
+<blockquote>
+<p>注：@Transactional注解中添加了readOnly=true，但@Transactional注解修饰的方法涉及数据的修改，因此抛出如下异常：<br>Caused by: java.sql.SQLException: Connection is read-only. Queries leading to data modification are not allowed</p>
+</blockquote>
+<h3 id="4-timeout"><a href="#4-timeout" class="headerlink" title="4.timeout"></a>4.timeout</h3><ol>
+<li><p>释义：设置一个事务所允许执行的最长时长（单位：秒），如果超过该时长且事务还没有完成，则自动回滚事务且出现org.springframework.transaction.TransactionTimedOutException异常，如下代码：<br>！<a href="https://raw.githubusercontent.com/Laicize/wenke_images/master/img/20190715170513.png" target="_blank" rel="noopener"></a></p>
+<blockquote>
+<p>注：Thread.sleep(4000)会使得当前事务4秒之后结束，该时长超出了所允许的最长时长，因此事务自动回滚，书籍表库存递减操作无效，程序出现org.springframework.transaction.TransactionTimedOutException异常！<br>1、事务的开始往往会发生数据库的表锁或者被数据库优化为行锁，如果允许时间过长，那么这些数据会一直被锁定，最终影响系统的并发性，因此可以给这些事务设置超时时间以规避该问题。<br>2、由于超时是在一个事务启动的时候开始的，因此，只有对于那些具有可能启动一个新事务的传播行为（PROPAGATION_REQUIRES_NEW、PROPAGATION_REQUIRED、ROPAGATION_NESTED）的方法来说，声明事务超时才有意义。</p>
+</blockquote>
+<h2 id="四：事务的传播机制"><a href="#四：事务的传播机制" class="headerlink" title="四：事务的传播机制"></a>四：事务的传播机制</h2><h3 id="propagation："><a href="#propagation：" class="headerlink" title="propagation："></a>propagation：</h3><p>指定事务传播行为，一个事务方法被另一个事务方法调用时，必须指定事务应该如何传播，例如：方法可能继承在现有事务中运行，也可能开启一个新事物，并在自己的事务中运行。Spring定义了如下7种事务传播行为：</p>
+<h4 id="REQUIRED："><a href="#REQUIRED：" class="headerlink" title="REQUIRED："></a>REQUIRED：</h4><p>默认值，如果有事务在运行，当前的方法就在这个事务内运行，否则，就启动一个新的事务，并在自己的事务内运行</p>
+<h4 id="REQUIRES-NEW："><a href="#REQUIRES-NEW：" class="headerlink" title="REQUIRES_NEW："></a>REQUIRES_NEW：</h4><p>当前方法必须启动新事务，并在它自己的事务内运行，如果有事务在运行，则把当前事务挂起，直到新的事务提交或者回滚才恢复执行。</p>
+<h4 id="SUPPORTS："><a href="#SUPPORTS：" class="headerlink" title="SUPPORTS："></a>SUPPORTS：</h4><p>如果有事务在运行，当前的方法就在这个事务内运行，否则以非事务的方式运行；</p>
+<h4 id="NOT-SUPPORTED："><a href="#NOT-SUPPORTED：" class="headerlink" title="NOT_SUPPORTED："></a>NOT_SUPPORTED：</h4><p>当前的方法不应该运行在事务中，如果有运行的事务，则将它挂起；</p>
+<h4 id="NEVER："><a href="#NEVER：" class="headerlink" title="NEVER："></a>NEVER：</h4><p>当前方法不应该运行在事务中，否则将抛出异常；</p>
+<h4 id="MANDATORY（mandatory-ˈmaendətoːri-adj-强制的）："><a href="#MANDATORY（mandatory-ˈmaendətoːri-adj-强制的）：" class="headerlink" title="MANDATORY（mandatory [ˈmændətɔːri] adj.强制的）："></a>MANDATORY（mandatory [ˈmændətɔːri] adj.强制的）：</h4><p>当前方法必须运行在事务内部，否则将抛出异常；</p>
+<h4 id="NESTED（nest-nest-v-嵌套）："><a href="#NESTED（nest-nest-v-嵌套）：" class="headerlink" title="NESTED（nest [nest] v.嵌套）："></a>NESTED（nest [nest] v.嵌套）：</h4><p>如果有事务在运行，当前的方法在这个事务的嵌套事务内运行，否则就启动一个新的事务，并在它自己的事务内运行，此时等价于REQUIRED。注意：对于NESTED内层事务而言，内层事务独立于外层事务，可以独立递交或者回滚,如果内层事务抛出的是运行异常，外层事务进行回滚，内层事务也会进行回滚。<br>部分示例代码如下：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">{</span>
+
+ <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     ClassPathXmlApplicationContext application <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ClassPathXmlApplicationContext</span><span class="token punctuation">(</span><span class="token string">"application.xml"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>        
+     <span class="token comment" spellcheck="true">//购物车购买</span>
+     ICarService carService <span class="token operator">=</span> application<span class="token punctuation">.</span><span class="token function">getBean</span><span class="token punctuation">(</span>CarService<span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     String userId <span class="token operator">=</span> <span class="token string">"aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"</span><span class="token punctuation">;</span>
+     Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span>Integer<span class="token operator">></span> commodities <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token operator">&lt;</span>String<span class="token punctuation">,</span>Integer<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     commodities<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"a2f39533-659f-42ca-af91-c688a83f6e49"</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     commodities<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"4c37672a-653c-4cc8-9ab5-ee0c614c7425"</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     carService<span class="token punctuation">.</span><span class="token function">batch</span><span class="token punctuation">(</span>userId<span class="token punctuation">,</span> commodities<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     application<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CarService</span> <span class="token keyword">implements</span> <span class="token class-name">ICarService</span> <span class="token punctuation">{</span>
+
+ <span class="token annotation punctuation">@Autowired</span>
+ <span class="token keyword">private</span> ICouponService couponService<span class="token punctuation">;</span>
+
+ <span class="token comment" spellcheck="true">//购物车购买</span>
+ <span class="token annotation punctuation">@Override</span>
+ <span class="token annotation punctuation">@Transactional</span>
+ <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">batch</span><span class="token punctuation">(</span>String userId<span class="token punctuation">,</span>Map<span class="token operator">&lt;</span>String<span class="token punctuation">,</span>Integer<span class="token operator">></span> commodities<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+     Set<span class="token operator">&lt;</span>Entry<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Integer<span class="token operator">>></span> set <span class="token operator">=</span> commodities<span class="token punctuation">.</span><span class="token function">entrySet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token keyword">for</span> <span class="token punctuation">(</span>Entry<span class="token operator">&lt;</span>String<span class="token punctuation">,</span> Integer<span class="token operator">></span> commodity <span class="token operator">:</span> set<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+         String bookId <span class="token operator">=</span> commodity<span class="token punctuation">.</span><span class="token function">getKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token keyword">int</span> count <span class="token operator">=</span> commodity<span class="token punctuation">.</span><span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>bookId<span class="token operator">+</span><span class="token string">","</span><span class="token operator">+</span>count<span class="token punctuation">)</span><span class="token punctuation">;</span>
+         couponService<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>userId<span class="token punctuation">,</span>bookId<span class="token punctuation">,</span> count<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token punctuation">}</span>
+     <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CouponService</span> <span class="token keyword">implements</span> <span class="token class-name">ICouponService</span> <span class="token punctuation">{</span>
+
+ <span class="token annotation punctuation">@Autowired</span>
+ <span class="token keyword">private</span> IBookDao bookDao<span class="token punctuation">;</span>
+ <span class="token annotation punctuation">@Autowired</span>
+ <span class="token keyword">private</span> IMoneyDao moneyDao<span class="token punctuation">;</span>
+ <span class="token annotation punctuation">@Autowired</span>
+ <span class="token keyword">private</span> ICouponDao couponDao<span class="token punctuation">;</span>
+
+ <span class="token comment" spellcheck="true">//立即购买</span>
+ <span class="token annotation punctuation">@Override</span>
+ <span class="token annotation punctuation">@Transactional</span>
+ <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">insert</span><span class="token punctuation">(</span>String userId<span class="token punctuation">,</span>String bookId<span class="token punctuation">,</span> <span class="token keyword">int</span> count<span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+     <span class="token keyword">if</span><span class="token punctuation">(</span>bookDao<span class="token punctuation">.</span><span class="token function">enough</span><span class="token punctuation">(</span>bookId<span class="token punctuation">,</span> count<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token comment" spellcheck="true">//书籍足够</span>
+         <span class="token comment" spellcheck="true">//书籍表库存递减</span>
+         bookDao<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span>bookId<span class="token punctuation">,</span> count<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token punctuation">}</span>
+     <span class="token keyword">double</span> price <span class="token operator">=</span> bookDao<span class="token punctuation">.</span><span class="token function">getPrice</span><span class="token punctuation">(</span>bookId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token keyword">double</span> total <span class="token operator">=</span> price<span class="token operator">*</span>count<span class="token punctuation">;</span>
+     <span class="token keyword">if</span><span class="token punctuation">(</span>moneyDao<span class="token punctuation">.</span><span class="token function">enough</span><span class="token punctuation">(</span>userId<span class="token punctuation">,</span> total<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token comment" spellcheck="true">//余额足够</span>
+         <span class="token comment" spellcheck="true">//订单表添加数据</span>
+         Coupon coupon <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Coupon</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         coupon<span class="token punctuation">.</span><span class="token function">setId</span><span class="token punctuation">(</span>UUID<span class="token punctuation">.</span><span class="token function">randomUUID</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         coupon<span class="token punctuation">.</span><span class="token function">setUserId</span><span class="token punctuation">(</span>userId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+         coupon<span class="token punctuation">.</span><span class="token function">setBookId</span><span class="token punctuation">(</span>bookId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+         coupon<span class="token punctuation">.</span><span class="token function">setTotal</span><span class="token punctuation">(</span>total<span class="token punctuation">)</span><span class="token punctuation">;</span>
+         couponDao<span class="token punctuation">.</span><span class="token function">insert</span><span class="token punctuation">(</span>coupon<span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token comment" spellcheck="true">//钱包表递减</span>
+         moneyDao<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span>userId<span class="token punctuation">,</span> total<span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token punctuation">}</span>
+     <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span></code></pre>
+<blockquote>
+<p>注：其实这两个事务可以当做一个，即insert方法上的事务注解可以省略。<br>但是当insert方法上的事务注解添加REQUIRES_NEW属性时，insert方法每次执行即创建一个新的事务</p>
+</blockquote>
+<h2 id="五：事务的隔离机制"><a href="#五：事务的隔离机制" class="headerlink" title="五：事务的隔离机制"></a>五：事务的隔离机制</h2><p>###isolation：指定事务隔离级别，Spring定义了如下5种事务隔离级别：</p>
+<h4 id="DEFAULT："><a href="#DEFAULT：" class="headerlink" title="DEFAULT："></a>DEFAULT：</h4><p>默认值，表示使用底层数据库的默认隔离级别。对大部分数据库而言，通常为READ_COMMITTED。</p>
+<h4 id="READ-UNCOMMITTED："><a href="#READ-UNCOMMITTED：" class="headerlink" title="READ_UNCOMMITTED："></a>READ_UNCOMMITTED：</h4><p>表示一个事务可以读取另一个事务修改但还没有提交的数据。该级别可能出现脏读、不可重复读或幻读，因此很少使用该隔离级别。</p>
+<h4 id="READ-COMMITTED："><a href="#READ-COMMITTED：" class="headerlink" title="READ_COMMITTED："></a>READ_COMMITTED：</h4><p>表示一个事务只能读取另一个事务已经提交的数据。该级别可以防止脏读，但可能出现不可重复读或幻读，这也是大多数情况下的推荐值。</p>
+<h4 id="REPEATABLE-READ："><a href="#REPEATABLE-READ：" class="headerlink" title="REPEATABLE_READ："></a>REPEATABLE_READ：</h4><p>表示一个事务在整个过程中可以多次重复执行某个查询，且每次返回的记录都相同，除非数据被当前事务自生修改。即使在多次查询之间有新增的数据满足该查询，这些新增的记录也会被忽略。该级别可以防止脏读和不可重复读，但可能出现幻读。</p>
+<h4 id="SERIALIZABLE："><a href="#SERIALIZABLE：" class="headerlink" title="SERIALIZABLE："></a>SERIALIZABLE：</h4><p>表示所有的事务依次逐个执行，事务之间互不干扰，该级别可以防止脏读、不可重复读和幻读，但是这将严重影响程序的性能，因此通常情况下也不会用到该级别。</p>
+<blockquote>
+<p>注：事务的隔离级别要得到底层数据库引擎的支持, 而不是应用程序或者框架的支持：Oracle 支持READ_COMMITED和SERIALIZABLE两种事务隔离级别，默认为READ_COMMITED；MySQL 支持READ_UNCOMMITTED、READ_COMMITTED、REPEATABLE_READ和SERIALIZABLE四种事务隔离级别，默认为:REPEATABLE_READ。</p>
+</blockquote>
+<h3 id="并发导致数据出现的问题"><a href="#并发导致数据出现的问题" class="headerlink" title="并发导致数据出现的问题"></a>并发导致数据出现的问题</h3><h4 id="1-脏读-Drity-Read"><a href="#1-脏读-Drity-Read" class="headerlink" title="1.脏读(Drity Read)"></a>1.脏读(Drity Read)</h4></li>
+<li><p>释义：已知有两个事务A和B, A读取了已经被B更新但还没有被提交的数据，之后，B回滚事务，A读取的数据就是脏数据。</p>
+<blockquote>
+<p>注：即事务b读取了事务a在内存中修改的数据（未提交写入数据库的磁盘）<br>即READ_UNCOMMITTED（读未提交隔离机制）即可发生的问题<br>场景：公司发工资了，领导把5000元打到Tom的账号上，但是该事务并未提交，而Tom正好去查看账户，发现工资已经到账，账户多了5000元，非常高兴，可是不幸的是，领导发现发给Tom的工资金额不对，是2000元，于是迅速回滚了事务，修改金额后，将事务提交，Tom再次查看账户时发现账户只多了2000元。</p>
+</blockquote>
+<h4 id="2-不可重复读-Non-repeatable-read"><a href="#2-不可重复读-Non-repeatable-read" class="headerlink" title="2. 不可重复读(Non-repeatable read)"></a>2. 不可重复读(Non-repeatable read)</h4></li>
+<li><p>释义：已知有两个事务A和B，A 多次读取同一数据，B 在A多次读取的过程中对数据作了修改并提交，导致A多次读取同一数据时，结果不一致。</p>
+<blockquote>
+<p>注：即事务b在前后读取一个数据的期间，事务a对该数据进行了修改。<br>READ_COMMITED隔离机制即可发生该问题<br>场景：Tom拿着工资卡去消费，酒足饭饱后在收银台买单，服务员告诉他本次消费1000元，Tom将银行卡给服务员，服务员将银行卡插入POS机，POS机读到卡里余额为3000元，就在Tom磨磨蹭蹭输入密码时，他老婆以迅雷不及掩耳盗铃之势把Tom工资卡的3000元转到自己账户并提交了事务，当Tom输完密码并点击“确认”按钮后，POS机检查到Tom的工资卡已经没有钱，扣款失败。</p>
+</blockquote>
+<h4 id="3-幻读-Phantom-Read"><a href="#3-幻读-Phantom-Read" class="headerlink" title="3.幻读(Phantom Read)"></a>3.幻读(Phantom Read)</h4></li>
+<li><p>释义：已知有两个事务A和B，A从一个表中读取了数据，然后B在该表中插入了一些新数据，导致A再次读取同一个表, 就会多出几行，简单地说，一个事务中</p>
+<blockquote>
+<p>注：事务b前后读取的数据库期间，事务a对该数据库进行了增加操作<br>场景：om的老婆工作在银行部门，她时常通过银行内部系统查看Tom的工资卡消费记录。2019年5月的某一天，她查询到Tom当月工资卡的总消费额（select sum(amount) from record where card_id=’6226090219290000’ and date_format(create_time,’%Y-%m’)=’2019-05’）为80元，Tom的老婆非常吃惊，心想“老公真是太节俭了，嫁给他真好！”，而Tom此时正好在外面胡吃海塞后在收银台买单，消费1000元，即新增了一条1000元的消费记录并提交了事务，沉浸在幸福中的老婆查询了Tom当月工资卡消费明细（select amount from record where card_id=’6226090219290000’ and date_format(create_time,’%Y-%m’)=’2019-05’）一探究竟，可查出的结果竟然发现有一笔1000元的消费。</p>
+</blockquote>
+<h4 id="4-总结"><a href="#4-总结" class="headerlink" title="4.总结"></a>4.总结</h4><p>不可重复读的和幻读很容易混淆，不可重复读侧重于修改，幻读侧重于新增或删除。解决不可重复读的问题只需锁住满足条件的行，解决幻读需要锁表。</p>
+<h3 id="用数据库的事务隔离机制对数据问题进行解决"><a href="#用数据库的事务隔离机制对数据问题进行解决" class="headerlink" title="用数据库的事务隔离机制对数据问题进行解决"></a>用数据库的事务隔离机制对数据问题进行解决</h3></li>
+<li><p>Read uncommitted（读未提交）：可能出现脏读、不可重复读和幻读。</p>
+</li>
+<li><p>Read committed（读提交）：可以避免脏读，但可能出现不可重复读和幻读。大多数数据库默认级别就是Read committed，比如Sql Server数据库和Oracle数据库。注意：该隔离级别在写数据时只会锁住相应的行。</p>
+</li>
+<li><p>Repeatable read（重复读）：可以避免脏读和不可重复读，但可能出现幻读。注意：事务隔离级别为可重复读时，如果检索条件有索引（包括主键索引）的时候，默认加锁方式是next-key 锁；如果检索条件没有索引，更新数据时会锁住整张表。一个间隙被事务加了锁，其他事务是不能在这个间隙插入记录的，这样可以防止幻读。</p>
+</li>
+<li><p>Serializable（序列化）：可以避免脏读、不可重复读和幻读，但是并发性极低，一般很少使用。注意：该隔离级别在读写数据时会锁住整张表。<br>总结：<br>！<a href="![](https://raw.githubusercontent.com/Laicize/wenke_images/master/img/20190715175413.png)"></a></p>
+<blockquote>
+<p>注：√表示可能出现，×表示不会出现<br>隔离级别越高，越能保证数据的完整性和一致性，但是对并发性能的影响也越大。</p>
+</blockquote>
+<h3 id="MySQL事务隔离级别"><a href="#MySQL事务隔离级别" class="headerlink" title="MySQL事务隔离级别"></a>MySQL事务隔离级别</h3></li>
+<li><p>查看隔离机制：MySQL数据库支持Read uncommitted、Read committed、Repeatable read和Serializable四种事务隔离级别，默认为Repeatable read，可以通过如下语句查看MySQL数据库事务隔离级别：</p>
+<pre class=" language-mysql"><code class="language-mysql">select @@global.tx_isolation,@@tx_isolation;</code></pre>
+</li>
+<li><p>修改数据库的隔离机制<br>MySQL数据库事务隔离级别的修改分为全局修改和当前session修改，具体修改方法如下：<br>1、全局修改<br>①、在my.ini配置文件最后加上如下配置：<br>#可选参数有：READ-UNCOMMITTED, READ-COMMITTED, REPEATABLE-READ, SERIALIZABLE.<br>[mysqld]<br>②、重启MySQL服务<br>2、当前session修改，登录MySQL数据库后执行如下命令：<br>set session transaction isolation level read </p>
+</li>
+</ol>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://www.wenke.ink" rel="external nofollow noreferrer">菠菜</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://www.wenke.ink/posts/46560.html">https://www.wenke.ink/posts/46560.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://www.wenke.ink" target="_blank">菠菜</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E4%BA%8B%E5%8A%A1%E7%9A%84%E4%BC%A0%E6%92%AD/">
+                                    <span class="chip bg-color">事务的传播</span>
+                                </a>
+                            
+                                <a href="/tags/%E4%BA%8B%E5%8A%A1%E7%9A%84%E6%B3%A8%E8%A7%A3/">
+                                    <span class="chip bg-color">事务的注解</span>
+                                </a>
+                            
+                                <a href="/tags/%E4%BA%8B%E5%8A%A1%E7%9A%84%E9%9A%94%E7%A6%BB%E6%9C%BA%E5%88%B6/">
+                                    <span class="chip bg-color">事务的隔离机制</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/loading.gif" data-original="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/loading.gif" data-original="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+    <div class="livere-card card" data-aos="fade-up">
+    <!-- 来必力City版安装代码 -->
+    <div id="lv-container" class="card-content" data-id="city" data-uid="MTAyMC80MzMzMS8xOTg3Mg==">
+        <script type="text/javascript">
+            (function (d, s) {
+                let j, e = d.getElementsByTagName(s)[0];
+                if (typeof LivereTower === 'function') {
+                    return;
+                }
+
+                j = d.createElement(s);
+                j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                j.async = true;
+
+                e.parentNode.insertBefore(j, e);
+            })(document, 'script');
+        </script>
+        <noscript>为正常使用来必力评论功能请激活JavaScript。</noscript>
+    </div>
+    <!-- City版安装代码已完成 -->
+</div>
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/posts/63865.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/loading.gif" data-original="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//medias/featureimages/7.jpg" class="responsive-img" alt="Mysql入门之表的操作">
+                        
+                        <span class="card-title">Mysql入门之表的操作</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本文讲述Mysql入门中的表的相关操作
+
+操作表１．　创建表语法：
+create table teacher(
+    id char(36) primary key auto_increment comment '主键',
+    use
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-07-15
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            菠菜
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Mysql%E5%85%A5%E9%97%A8-%EF%BC%8D%E8%A1%A8%E7%9A%84%E6%93%8D%E4%BD%9C/">
+                        <span class="chip bg-color">-Mysql入门 －表的操作</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/posts/34481.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/loading.gif" data-original="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//medias/featureimages/20.jpg" class="responsive-img" alt="idea快捷键大全">
+                        
+                        <span class="card-title">idea快捷键大全</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本人常用
+Ctrl+X，删除行
+Ctrl+D，复制行
+Ctrl+F，查找文本
+Ctrl+E，最近的文件
+ctrl +/:多行分行注释
+ctrl+space：代码补全
+Ctrl+Backspace，按单词删除
+double shift：全局搜
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-15
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/IDEA%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BD%BF%E7%94%A8/" class="post-category">
+                                    IDEA工具的使用
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/IDEA%E5%B7%A5%E5%85%B7/">
+                        <span class="chip bg-color">IDEA工具</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/">
+                        <span class="chip bg-color">快捷键</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="503838841"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2017</span>
+            <a href="https://www.wenke.ink" target="_blank">菠菜</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">69.3k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/Laicize?tab=repositories" class="tooltipped" target="https://github.com/Laicize/" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:wangwenzhong12@gmail.com" class="tooltipped" target="wangwenzhong12@gmail.com" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2665268424" class="tooltipped" target="2665268424" data-tooltip="QQ联系我: 2665268424" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/materialize/materialize.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/aos/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/background/canvas-nest.js"></script>
+    
+
+    
+    
+    <script type="text/javascript" size="150" alpha='0.6'
+        zIndex="-1" src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/background/ribbon-refresh.min.js" async="async"></script>
+    
+
+    
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/background/ribbon-dynamic.js" async="async"></script>
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/gh/Laicize/Laicize.github.io@1.0//libs/instantpage/instantpage.js" type="module"></script>
+    
+
+<script>!function(e){var c=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){for(var r=0;r<c.length;r++)t=c[r],0<=(n=t.getBoundingClientRect()).bottom&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=c[r];t=o,n=function(){c=c.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}i(),e.addEventListener("scroll",function(){var t,n;t=i,n=e,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)})}(this);</script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script></body>
+
+</html>
